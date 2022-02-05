@@ -1,4 +1,7 @@
 import React from 'react';
+import { getStatusBarHeight } from 'react-native-iphone-x-helper';
+import auth from '@react-native-firebase/auth';
+
 import { ButtonIcon } from '../ButtonIcon';
 
 import { Container, Title } from './styles';
@@ -8,7 +11,13 @@ type Props = {
   showLogoutButton?: boolean;
 }
 
+const statusBarHeight = getStatusBarHeight(); 
+
 export function Header({ title, showLogoutButton = false }: Props) {
+  function handleLogout() {
+    auth().signOut();
+  }
+
   return (
     <Container showLogoutButton={showLogoutButton}>
       <Title>
@@ -20,8 +29,8 @@ export function Header({ title, showLogoutButton = false }: Props) {
         <ButtonIcon
           icon="logout"
           color="alert"
-          style={{ marginTop: 20 }}
-          onPress={() => {}}
+          style={{ marginTop: statusBarHeight }}
+          onPress={handleLogout}
         />
       }
     </Container>

@@ -1,32 +1,78 @@
-import React from 'react';
-import { FlatList } from 'react-native';
+import React, { useState } from 'react';
+import { Alert, FlatList } from 'react-native';
+import storage from '@react-native-firebase/storage';
 
 import { Container, PhotoInfo } from './styles';
 import { Header } from '../../components/Header';
 import { Photo } from '../../components/Photo';
-import { File } from '../../components/File';
-
-import { photosData } from '../../utils/photo.data';
+import { File, FileProps } from '../../components/File';
+import { useFocusEffect } from '@react-navigation/native';
 
 export function Receipts() {
+  const [photos, setPhotos] = useState<FileProps[]>([]);
+  const [photoSelected, setPhotoSelected] = useState('');
+  const [photoSelectedInfo, setPhotoSelectedInfo] = useState('');
+
+  async function fetchImages() {
+    storage().ref('images').list().then(result => {
+      const files: FileProps[] = [];
+
+      result.items.forEach(file => {
+        files.push({
+          name: file.name,
+          path: file.fullPath,
+        });
+      });
+
+      setPhotos(files);
+    });
+  }
+
+  useFocusEffect(() => {
+    fetchImages();
+  });
+
+  async function handleShowImage(path: string) {
+    const imageURL = await storage().ref(path).getDownloadURL();
+
+    setPhotoSelected(imageURL);
+
+    const info = await storage().ref(path).getMetadata();
+
+    setPhotoSelectedInfo(`Upload realizado em ${info.timeCreated}`)
+  } 
+
+  async function handleDeleteImage(path: string) {
+    storage()
+      .ref(path)
+      .delete()
+      .then(() => {
+        Alert.alert('Imagem excluída com sucesso'); 
+        
+        fetchImages();
+
+        setPhotoSelected('');
+        setPhotoSelectedInfo('');
+      })
+      .catch(error => console.error(error));
+  } 
+
   return (
     <Container>
       <Header title="Comprovantes" />
 
-      <Photo uri="" />
+      <Photo uri={photoSelected} />
 
-      <PhotoInfo>
-        Informações da foto
-      </PhotoInfo>
+      <PhotoInfo>{photoSelectedInfo}</PhotoInfo>
 
       <FlatList
-        data={photosData}
+        data={photos}
         keyExtractor={item => item.name}
         renderItem={({ item }) => (
           <File
             data={item}
-            onShow={() => { }}
-            onDelete={() => { }}
+            onShow={() => handleShowImage(item.path)}
+            onDelete={() => handleDeleteImage(item.path)}
           />
         )}
         contentContainerStyle={{ paddingBottom: 100 }}
