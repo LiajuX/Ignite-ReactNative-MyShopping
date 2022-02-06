@@ -1,7 +1,6 @@
 <br>
 <h1 align="center">
   <img src="https://github.com/LiajuX/Ignite-ReactNative-MyShopping/blob/main/src/assets/logo.svg" alt="MyShopping" width="550px">
-  <br>
 <br>
 </h1>
 
