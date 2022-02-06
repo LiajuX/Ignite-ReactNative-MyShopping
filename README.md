@@ -1,6 +1,10 @@
+<br>
 <h1 align="center">
-  <img src="https://github.com/LiajuX/Ignite-ReactNative-MyShopping/blob/main/src/assets/logo.svg" alt="MyShopping" width="600px">
+  <img src="https://github.com/LiajuX/Ignite-ReactNative-MyShopping/blob/main/src/assets/logo.svg" alt="MyShopping" width="550px">
+  <br>
+<br>
 </h1>
+
 
 <p align="center">  
   <img alt="React Native version" src="https://img.shields.io/badge/React_Native-v0.64.2-60dafb?style=flat&logoColor=60dafb&logo=react">
