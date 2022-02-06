@@ -47,7 +47,7 @@ export function Upload() {
       });
   
       uploadTask.then(() => {
-        Alert.alert('Upload concluído com sucesso!');
+        Alert.alert('Upload concluído com sucesso!', 'Abra a aba de comprovantes para verificar.');
   
         setImage('');
         setBytesTransferred('');
@@ -58,7 +58,7 @@ export function Upload() {
 
   return (
     <Container>
-      <Header title="Upload de fotos" />
+      <Header title="Upload de comprovantes" />
 
       <Content>
         <Photo uri={image} onPress={handlePickImage} />

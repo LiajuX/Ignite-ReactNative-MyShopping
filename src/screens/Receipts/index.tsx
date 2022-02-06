@@ -47,8 +47,6 @@ export function Receipts() {
       .ref(path)
       .delete()
       .then(() => {
-        Alert.alert('Imagem excluída com sucesso'); 
-        
         fetchImages();
 
         setPhotoSelected('');

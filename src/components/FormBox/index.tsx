@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Alert } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 
 import { Container } from './styles';
@@ -8,7 +7,7 @@ import { Input } from '../Input';
 
 export function FormBox() {
   const [description, setDescription] = useState('');
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState('');
 
   async function handleProductAdd() {
     firestore()
@@ -21,8 +20,7 @@ export function FormBox() {
     })
     .then(() => {    
       setDescription('');
-      
-      Alert.alert('Produto adicionado com sucesso!');
+      setQuantity('');    
     })
     .catch((error) => console.log(error));
   }
@@ -37,11 +35,12 @@ export function FormBox() {
       />
 
       <Input
+        value={quantity}
         placeholder="0"
         keyboardType="numeric"
         size="small"
         style={{ marginHorizontal: 8 }}
-        onChangeText={value => setQuantity(Number(value))}
+        onChangeText={setQuantity}
       />
 
       <ButtonIcon
