@@ -1,7 +1,6 @@
 <br>
 <h1 align="center">
-  <img src="https://github.com/LiajuX/Ignite-ReactNative-MyShopping/blob/main/src/assets/logo.svg" alt="MyShopping" width="550px">
-<br>
+  <img src="https://github.com/LiajuX/Ignite-ReactNative-MyShopping/blob/main/src/assets/logo.svg" alt="MyShopping" width="500px">
 <br>
 
 </h1>
@@ -37,8 +36,6 @@
 This project is a part of an extra module of the React Native trail of [Ignite](https://rocketseat.com.br/ignite) to learn the fundamentals of Firebase.
 
 <br>
-
-<br> 
 
 ## 🛒  The Project:
 
